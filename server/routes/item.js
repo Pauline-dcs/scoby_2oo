@@ -26,7 +26,7 @@ router.get("/:id", (req, res, next) => {
 // A verifier
 
 router.post("/", (req, res, next) => {
-    const { name, description, category, quantity, address, location, timestamps } = req.body; 
+    const { name, description, category, quantity, address } = req.body; 
     console.log(req.body);
 
     if (req.file) {
@@ -35,6 +35,12 @@ router.post("/", (req, res, next) => {
 
     
     Item.create(req.body)
+    .then((dbRes) => {
+            res.status(200).json(dbRes)
+        })
+        .catch((error) => {
+            res.status(500).json(error)
+        })
     
 })
 
