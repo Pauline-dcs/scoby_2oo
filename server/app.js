@@ -9,6 +9,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 const mongoose = require("mongoose");
 const app = express();
+const cors = require("cors");
 
 /**
  * Middlewares
@@ -27,6 +28,12 @@ app.use(
     resave: true,
     saveUninitialized: true,
   })
+);
+
+app.use(
+	cors({
+		origin: process.env.FRONT_END_URL,
+	})
 );
 
 // Test to see if user is logged In before getting into any router.
